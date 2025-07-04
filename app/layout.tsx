@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
-import { Manrope } from 'next/font/google';
+// Removed font import to avoid network fetch during build
 import { getUser, getTeamForUser } from '@/lib/db/queries';
 import { SWRConfig } from 'swr';
 
@@ -13,7 +13,6 @@ export const viewport: Viewport = {
   maximumScale: 1
 };
 
-const manrope = Manrope({ subsets: ['latin'] });
 
 export default function RootLayout({
   children
@@ -21,10 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`bg-white dark:bg-gray-950 text-black dark:text-white ${manrope.className}`}
-    >
+    <html lang="en" className="bg-white dark:bg-gray-950 text-black dark:text-white">
       <body className="min-h-[100dvh] bg-gray-50">
         <SWRConfig
           value={{

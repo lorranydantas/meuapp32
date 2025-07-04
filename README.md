@@ -16,6 +16,13 @@ This is a starter template for building a SaaS application using **Next.js** wit
 - Local middleware to protect Server Actions or validate Zod schemas
 - Activity logging system for any user events
 
+### Yoga Platform Extensions
+
+- Course catalog with categories, courses and lessons
+- Progress tracking per lesson
+- Subscription records synced with Stripe
+- Initial translation files for English, Russian and Spanish (Mexican)
+
 ## Tech Stack
 
 - **Framework**: [Next.js](https://nextjs.org/)
