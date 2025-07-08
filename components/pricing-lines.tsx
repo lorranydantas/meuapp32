@@ -3,7 +3,7 @@
 import { SubmitButton } from "@/app/(dashboard)/pricing/submit-button";
 import { checkoutAction } from "@/lib/payments/actions";
 import Link from "next/link";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface StripeProduct {
   id: string;
@@ -11,12 +11,18 @@ interface StripeProduct {
   description: string | null;
   defaultPriceId?: string;
   metadata: { [key: string]: string };
+    amount: number | undefined;
+}
+
+type PricingLinesProps = { 
+  products: StripeProduct[]; 
+  selected: string;
+  setSelected: Dispatch<SetStateAction<string>>; 
 }
 
 const MAIN_PRODUCT = "prod_SMGAD37AwtPZEL";
 
-export function PricingLines({ products }: { products: StripeProduct[] }) {
-  const [selected, setSelected] = useState(MAIN_PRODUCT)
+export function PricingLines({ products, selected, setSelected }: PricingLinesProps) {
   return (
     <>
       <div className="mb-6">
