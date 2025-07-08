@@ -178,6 +178,9 @@ export async function getStripeProducts() {
       typeof product.default_price === 'string'
         ? product.default_price
         : product.default_price?.id,
+    amount: typeof product.default_price === 'string'
+        ? undefined
+        : product.default_price?.unit_amount ?? undefined,
     metadata: product.metadata,
   }));
 }
