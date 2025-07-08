@@ -81,7 +81,7 @@ export function PricingPageClient({ products }: { products: StripeProduct[] }) {
         <h3 className="text-2xl font-bold text-gray-700">Monatliche Kosten</h3>
         <div className="p-6 border-b border-gray-200 bg-white divide-y-2">
           <div className="flex flex-row gap-4 justify-between pb-3">
-            <p>GLASFASER.home 1000</p>
+            <p>{product?.name || "GLASFASER.home 1000"}</p>
             <p>{product?.amount ? displayPrice(product.amount) : "99.99 €"}</p>
           </div>
           <div className="flex flex-row gap-4 justify-between text-orange-400 pt-3">
