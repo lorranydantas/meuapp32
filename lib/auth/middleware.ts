@@ -62,7 +62,10 @@ export function withTeam<T>(action: ActionWithTeamFunction<T>) {
   return async (formData: FormData): Promise<T> => {
     const user = await getUser();
     if (!user) {
-      redirect('/sign-in');
+      if (formData.get("priceId")) {
+        redirect(`/sign-up?redirect=checkout&priceId=${formData.get("priceId")}`);
+      }
+      redirect('/sign-up');
     }
 
     const team = await getTeamForUser();
