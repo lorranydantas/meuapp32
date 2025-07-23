@@ -29,6 +29,12 @@ export const teams = pgTable('teams', {
   stripeProductId: text('stripe_product_id'),
   planName: varchar('plan_name', { length: 50 }),
   subscriptionStatus: varchar('subscription_status', { length: 20 }),
+  creditBalance: integer('credit_balance').default(0).notNull(),
+  creditLimit: integer('credit_limit').default(0).notNull(),
+  creditsGrantedThisPeriod: integer('credits_granted_this_period').default(0).notNull(),
+  billingPeriodStart: timestamp('billing_period_start'),
+  billingPeriodEnd: timestamp('billing_period_end'),
+  stripeMeterId: varchar('stripe_meter_id', { length: 255 }),
 });
 
 export const teamMembers = pgTable('team_members', {
@@ -140,3 +146,26 @@ export enum ActivityType {
   INVITE_TEAM_MEMBER = 'INVITE_TEAM_MEMBER',
   ACCEPT_INVITATION = 'ACCEPT_INVITATION',
 }
+
+export const creditUsageLogs = pgTable('credit_usage_logs', {
+  id: serial('id').primaryKey(),
+  teamId: integer('team_id').references(() => teams.id),
+  userId: integer('user_id').references(() => users.id),
+  creditsUsed: integer('credits_used').notNull(),
+  actionType: varchar('action_type', { length: 100 }).notNull(),
+  description: text('description'),
+  metadata: text('metadata'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export const creditGrantsLogs = pgTable('credit_grants_logs', {
+  id: serial('id').primaryKey(),
+  teamId: integer('team_id').references(() => teams.id),
+  creditsGranted: integer('credits_granted').notNull(),
+  grantReason: varchar('grant_reason', { length: 100 }).notNull(),
+  stripeGrantId: varchar('stripe_grant_id', { length: 255 }),
+  billingPeriodStart: timestamp('billing_period_start'),
+  billingPeriodEnd: timestamp('billing_period_end'),
+  metadata: text('metadata'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
