@@ -1,12 +1,6 @@
-// Stripe temporarily disabled to allow deployment
-export async function GET(req: Request) {
-  return new Response(JSON.stringify({ message: "Stripe disabled for now" }), {
-    status: 200,
-  });
-}
-
+// Stripe webhook disabled
 export async function POST(req: Request) {
-  return new Response(JSON.stringify({ message: "Stripe disabled for now" }), {
+  return new Response(JSON.stringify({ message: "Stripe webhook disabled" }), {
     status: 200,
   });
 }
